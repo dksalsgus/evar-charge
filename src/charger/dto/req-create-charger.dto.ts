@@ -1,4 +1,5 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsString } from 'class-validator';
+import { EnChargerStatus } from '../charger.entity';
 
 export class CreateChargerDto {
   /**
@@ -24,5 +25,6 @@ export class CreateChargerDto {
   /**
    * 충전소 상태
    */
-  status: number;
+  @IsEnum(EnChargerStatus)
+  status: EnChargerStatus;
 }

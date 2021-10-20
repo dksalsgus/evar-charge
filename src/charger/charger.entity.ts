@@ -1,5 +1,14 @@
 import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
+export enum EnChargerStatus {
+  통신이상 = 1,
+  충전대기 = 2,
+  충전중 = 3,
+  운영중지 = 4,
+  점검중 = 5,
+  상태미확인 = 9,
+}
+
 @Entity()
 export class Charger {
   /**
@@ -30,6 +39,10 @@ export class Charger {
   /**
    * 충전소 상태
    */
-  @Column({ type: 'int' })
-  status: number;
+  @Column({
+    type: 'enum',
+    enum: EnChargerStatus,
+    default: EnChargerStatus.충전대기,
+  })
+  status: EnChargerStatus;
 }
