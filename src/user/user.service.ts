@@ -47,6 +47,7 @@ export class UserService {
       const findUser = await this.findUserByUserNo(userNo);
       findUser.userPw = await this.userRepository.hashPw(updateUserDto.userPw);
       findUser.userEmail = updateUserDto.userEmail;
+      findUser.userRole = updateUserDto.userRole;
 
       const updateUser = this.userRepository.save(findUser);
       qr.commitTransaction();

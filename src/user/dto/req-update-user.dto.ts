@@ -1,4 +1,5 @@
-import { IsEmail, IsString } from 'class-validator';
+import { IsEmail, IsString, IsEnum } from 'class-validator';
+import { EnRole } from '../user.entity';
 
 export class UpdateUserDto {
   /**
@@ -11,4 +12,10 @@ export class UpdateUserDto {
    */
   @IsEmail()
   userEmail: string;
+
+  /**
+   * 회원 권한
+   */
+  @IsEnum(EnRole)
+  userRole: EnRole;
 }

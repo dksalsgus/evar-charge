@@ -1,6 +1,11 @@
 import { BaseEntity } from 'src/cls/BaseEntity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+export enum EnRole {
+  ADMIN = 0,
+  USER = 1,
+}
+
 @Entity()
 export class User extends BaseEntity {
   /**
@@ -23,4 +28,7 @@ export class User extends BaseEntity {
    */
   @Column({ type: 'varchar' })
   userEmail: string;
+
+  @Column({ type: 'enum', enum: EnRole, default: EnRole.USER })
+  userRole: EnRole;
 }
