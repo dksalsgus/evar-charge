@@ -32,15 +32,14 @@ export class AuthService {
    * @param authLoginDto 로그인 정보
    * @returns Access Token
    */
-  async login(authLoginDto: AuthLoginDto) {
+  async login(authLoginDto: AuthLoginDto): Promise<string> {
     const user = await this.validateMember(authLoginDto);
 
     const payload = {
       userId: user.userId,
     };
+    const access_token = await this.jwtService.sign(payload);
 
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    return access_token;
   }
 }
