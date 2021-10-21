@@ -3,10 +3,10 @@ import { EnChargerStatus } from '../charger.entity';
 
 export class CreateChargerDto {
   /**
-   * 충전기 ID
+   * 충전소 ID
    */
   @IsNumber()
-  chargerId: number;
+  stationId: number;
   /**
    * 충전소 주소
    */

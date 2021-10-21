@@ -12,15 +12,16 @@ export enum EnChargerStatus {
 @Entity()
 export class Charger {
   /**
-   * 충전소 ID
-   */
-  @PrimaryGeneratedColumn({ type: 'bigint' })
-  stationId: number;
-  /**
    * 충전기 ID
    */
-  @PrimaryColumn({ type: 'bigint' })
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   chargerId: number;
+  /**
+   * 충전소 ID
+   */
+  @PrimaryColumn({ type: 'bigint' })
+  stationId: number;
+
   /**
    * 충전소 주소
    */

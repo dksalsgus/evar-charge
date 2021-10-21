@@ -15,7 +15,7 @@ export class ChargerService {
 
   async createCharger(createChargerDto: CreateChargerDto): Promise<Charger> {
     const newCharger = new Charger();
-    newCharger.chargerId = createChargerDto.chargerId;
+    newCharger.stationId = createChargerDto.stationId;
     newCharger.addr = createChargerDto.addr;
     newCharger.lat = createChargerDto.lat;
     newCharger.lng = createChargerDto.lng;
