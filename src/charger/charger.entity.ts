@@ -19,23 +19,23 @@ export class Charger {
   /**
    * 충전소 ID
    */
-  @PrimaryColumn({ type: 'bigint' })
+  @Column({ type: 'bigint', unique: true, nullable: false, default: 0 })
   stationId: number;
 
   /**
    * 충전소 주소
    */
-  @Column({ type: 'nvarchar' })
+  @Column({ type: 'nvarchar', nullable: true })
   addr: string;
   /**
    * 충전소 위도
    */
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   lat: string;
   /**
    * 충전소 경도
    */
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   lng: string;
   /**
    * 충전소 상태

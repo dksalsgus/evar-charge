@@ -65,8 +65,12 @@ export class ChargerService {
     }
   }
 
-  async deleteCharger(chargerId: number): Promise<Object> {
+  async deleteCharger(chargerId: number): Promise<Charger> {
+    const del = await this.findChargerByChargerId(chargerId);
     const ret = await this.chargerRepository.delete({ chargerId });
-    return ret;
+    if (ret.affected < 1) {
+      throw new NotFoundException(`Not Found Charger ${del.chargerId}`);
+    }
+    return del;
   }
 }

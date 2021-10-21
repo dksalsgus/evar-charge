@@ -16,7 +16,7 @@ import { UpdateChargerDto } from './dto/req-update-charger.dto';
 export class ChargerController {
   constructor(private readonly chargerService: ChargerService) {}
 
-  @Post('charger')
+  @Post('chargers')
   async createCharger(
     @Body() createChargerDto: CreateChargerDto,
   ): Promise<Charger> {
@@ -24,7 +24,7 @@ export class ChargerController {
     return charger;
   }
 
-  @Get('charger/:chargerId')
+  @Get('chargers/:chargerId')
   async findChargerByChargerId(
     @Param('chargerId') chargerId: number,
   ): Promise<Charger> {
@@ -38,7 +38,7 @@ export class ChargerController {
     return chargers;
   }
 
-  @Patch('charger/:chargerId')
+  @Patch('chargers/:chargerId')
   async updateCharger(
     @Body() updateChargerDto: UpdateChargerDto,
     @Param('chargerId') chargerId: number,
@@ -50,9 +50,9 @@ export class ChargerController {
     return charger;
   }
 
-  @Delete('charger/:chargerId')
+  @Delete('chargers/:chargerId')
   async deleteCharger(@Param('chargerId') chargerId: number): Promise<Charger> {
     const ret = await this.chargerService.deleteCharger(chargerId);
-    return;
+    return ret;
   }
 }
