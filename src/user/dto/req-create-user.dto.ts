@@ -18,9 +18,9 @@ export class CreateUserDto {
   @IsEmail()
   userEmail: string;
 
-  /**
-   * 회원 권한
-   */
-  @IsEnum(EnRole)
-  userRole: EnRole;
+  // /**
+  //  * 회원 권한
+  //  */
+  // @IsEnum(EnRole)
+  // userRole: EnRole;
 }

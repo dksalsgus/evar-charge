@@ -10,7 +10,7 @@ export class UserRepository extends Repository<User> {
     newUser.userId = createUserDto.userId;
     newUser.userPw = await this.hashPw(createUserDto.userPw);
     newUser.userEmail = createUserDto.userEmail;
-    newUser.userRole = createUserDto.userRole;
+    // newUser.userRole = createUserDto.userRole;
 
     const joinUser = await this.create(newUser);
     const user = this.save(joinUser);
