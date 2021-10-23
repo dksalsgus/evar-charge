@@ -4,10 +4,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
+/**
+ * 쿠키에 저장된 jwt 가져오기
+ * @returns 토큰
+ */
 const fromAuthCookie = function () {
   return function (request) {
     let token = null;
-    if (request && request.cookees) {
+    if (request && request.cookies) {
       token = request.cookies['Authorization'];
     }
     return token;
@@ -19,7 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     @InjectRepository(UserRepository) private userRepository: UserRepository,
   ) {
     super({
-      jwtFromRequest: fromAuthCookie(), //ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: fromAuthCookie(), // 쿠키에 에서 가져온 jwt 체크 //ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
       secretOrKey: process.env.JWT_SECRET,
     });

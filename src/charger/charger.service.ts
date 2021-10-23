@@ -14,6 +14,7 @@ export class ChargerService {
   ) {}
 
   async createCharger(createChargerDto: CreateChargerDto): Promise<Charger> {
+    // Charger 객체생성
     const newCharger = new Charger();
     newCharger.stationId = createChargerDto.stationId;
     newCharger.addr = createChargerDto.addr;
@@ -21,14 +22,18 @@ export class ChargerService {
     newCharger.lng = createChargerDto.lng;
     newCharger.status = createChargerDto.status;
 
+    // entity 생성
     const createCharger = await this.chargerRepository.create(newCharger);
+    // DB저장
     const charger = await this.chargerRepository.save(createCharger);
 
     return charger;
   }
 
   async findChargerByChargerId(chargerId: number): Promise<Charger> {
+    // chargerId로 Charger 조회
     const findCharger = await this.chargerRepository.findOne({ chargerId });
+    // null check
     if (!findCharger) {
       throw new NotFoundException(`Not Found Charger chargerId = ${chargerId}`);
     }
@@ -36,6 +41,7 @@ export class ChargerService {
   }
 
   async findAllCharger(): Promise<Charger[]> {
+    // 모든 charger 조회
     const findChargers = await this.chargerRepository.find({});
     return findChargers;
   }
@@ -46,16 +52,21 @@ export class ChargerService {
   ): Promise<Charger> {
     const qr = getConnection().createQueryRunner();
     try {
+      // transaction 시작
       qr.startTransaction();
+      // chargerId로 Charger 조회
       const findCharger = await this.findChargerByChargerId(chargerId);
 
+      // Client에서 받은 Dto값으로 수정
       findCharger.addr = updateChargerDto.addr;
       findCharger.lat = updateChargerDto.lat;
       findCharger.lng = updateChargerDto.lng;
       findCharger.status = updateChargerDto.status;
 
+      // 저장
       const updateCharger = await this.chargerRepository.save(findCharger);
 
+      // commit transaction
       qr.commitTransaction();
       return updateCharger;
     } catch (error) {
@@ -66,11 +77,12 @@ export class ChargerService {
   }
 
   async deleteCharger(chargerId: number): Promise<Charger> {
+    // chragerId로 삭제할 Charger 조회
     const del = await this.findChargerByChargerId(chargerId);
-    const ret = await this.chargerRepository.delete({ chargerId });
-    if (ret.affected < 1) {
+    if (!del) {
       throw new NotFoundException(`Not Found Charger ${del.chargerId}`);
     }
+    const ret = await this.chargerRepository.delete({ chargerId });
     return del;
   }
 }
