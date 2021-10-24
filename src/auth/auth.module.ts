@@ -18,7 +18,7 @@ import { UserRepository } from '../user/user.repository';
       useFactory: async () => ({
         secret: process.env.JWT_SECRET,
         signOptions: {
-          expiresIn: 120,
+          expiresIn: 120, // jwt 유효 2분
         },
       }),
       inject: [ConfigService],
