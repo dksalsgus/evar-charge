@@ -1,29 +1,20 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNumber, IsNumberString, IsString } from 'class-validator';
 import { EnChargerStatus } from '../charger.entity';
 
 export class CreateChargerDto {
-  /**
-   * 충전소 ID
-   */
   @IsNumber()
+  @ApiProperty({description:'충전소 ID'})
   stationId: number;
-  /**
-   * 충전소 주소
-   */
   @IsString()
+  @ApiProperty({description:'충전소 주소'})
   addr: string;
-  /**
-   * 충전소 위도
-   */
   @IsNumberString()
+  @ApiProperty({description:'충전소 경도'})
   lat: string;
-  /**
-   * 충전소 경도
-   */
   @IsNumberString()
+  @ApiProperty({description:'충전소 위도'})
   lng: string;
-  /**
-   * 충전소 상태
-   */
-  status: EnChargerStatus;
+   @ApiProperty({description:'충전소 상태'})
+   status: EnChargerStatus;
 }
